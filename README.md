@@ -8,6 +8,7 @@ A Python implementation for generating secure sign header for the Bingx API. Thi
 - [Installation](#installation)
 - [Usage](#usage)
     - [How do I get request_payload values?](#how-do-i-get-request_payload-values)
+    - [Understanding the Original JavaScript Implementation](#understanding-the-original-javascript-implementation)
 - [Testing](#testing)
 - [Contributing](#contributing)
 
@@ -70,14 +71,14 @@ print(f"Sign Header Value: {sign_value}")
 
 ### How do I get request_payload values?
 
-The most crucial and dynamic values, especially the `request_payload`, often come directly from API requests made by the Bingx client application. Here’s how to obtain them:
+The most crucial and dynamic values, especially the `request_payload`, often come directly from API requests made by the Bingx web client. Here’s how to obtain them:
 
 1. **Open Developer Tools:**
-   - Launch your browser and open the Bingx web application.
+   - Launch your browser and open the Bingx website.
    - Open the Developer Tools by pressing `F12` or right-clicking on the page and selecting "Inspect" or "Inspect Element."
 
 2. **Navigate to the Network Tab:**
-   - In the Developer Tools, click on the "Network" tab. This tab captures all network requests made by the application.
+   - In the Developer Tools, click on the "Network" tab. This tab captures all network requests made by the webiste.
 
 3. **Filter Requests:**
    - Use the filter to narrow down the requests to a specific API endpoint. For example, type `api/copy-trade-facade/v2/real/trader/positions` or `api/v3/trader/orders/v3` in the filter box.
@@ -93,6 +94,22 @@ The most crucial and dynamic values, especially the `request_payload`, often com
 7. **Copy and Use:**
    - Copy the values and use them in your Python code to generate the sign header.
 
+### Understanding the Original JavaScript Implementation
+
+The sign header generation logic is located within the JavaScript files loaded by the Bingx web client. Here's how to find and understood the relevant code:
+
+1. Locating the Code: The sign generation logic can often be found in one of the initial JavaScript files loaded by the website. In many cases, the sixth loaded <script> is the one that contains the "encryptionContent" keyword, which is a key component used later in generating the sign.
+
+   **If you're having trouble locating the correct script, here are some previously used URLs that might help:**
+   - https://bin.bb-os.com/_nuxt/08f13682b3.modern.js
+   - https://bin.bb-os.com/_nuxt/941f858513.modern.js
+   - https://bin.bb-os.com/_nuxt/1491b29.js <-- the oldest one, used a few years ago
+
+![Location JavaScript Sign Implementation](https://github.com/user-attachments/assets/c704e003-1254-402f-a796-52a3265e3470)
+
+2. Analyzing the Code: Once you find the script file, search for the encryptionContent variable or the function responsible for generating the sign. By observing how this variable is constructed, you can understand the steps needed to replicate the signing process.
+
+![JavaScript Sign Implementation](https://github.com/user-attachments/assets/178245ac-3b2d-45aa-83e1-ad04a714e151)
 
 ## Testing 
 
