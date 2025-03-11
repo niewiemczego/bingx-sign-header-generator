@@ -29,7 +29,7 @@ This project is a reverse-engineered implementation based on analysis of the off
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/niewiemczego/bingx_sign_header_generator.git
+    git clone https://github.com/niewiemczego/bingx-sign-header-generator.git
     cd bingx_sign_header_generator
     ```
 
