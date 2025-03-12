@@ -50,11 +50,17 @@ from datetime import datetime
 from uuid import uuid4
 from bingx_sign_header_generator import BingxSignHeader
 
+# Make sure to use the same values in headers
+timestamp = int(datetime.now().timestamp() * 1000)
+trace_id = str(uuid4())
+device_id = str(uuid4())
+
+
 # Initialize with required parameters
 sign_header = BingxSignHeader(
-    timestamp=int(datetime.now().timestamp() * 1000),
-    trace_id=str(uuid4()),
-    device_id=str(uuid4()),
+    timestamp=timestamp,
+    trace_id=trace_id,
+    device_id=device_id,
     request_payload={
         "copyTradeLabelType": "2",
         "apiIdentity": "1347851488071426053",
