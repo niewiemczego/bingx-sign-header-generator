@@ -77,7 +77,7 @@ print(f"Sign Header Value: {sign_value}")
 
 ### How do I get request_payload values?
 
-The most crucial and dynamic values, especially the `request_payload`, often come directly from API requests made by the Bingx web client. Here’s how to obtain them:
+The `request_payload` comes directly from API requests made by the Bingx web client. Here’s how to obtain it:
 
 1. **Open Developer Tools:**
    - Launch your browser and open the Bingx website.
