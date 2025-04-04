@@ -46,21 +46,10 @@ This project is a reverse-engineered implementation based on analysis of the off
 Here's a simple example of how to use the `BingxSignHeader` class:
 
 ```python
-from datetime import datetime
-from uuid import uuid4
 from bingx_sign_header_generator import BingxSignHeader
-
-# Make sure to use the same values in headers
-timestamp = int(datetime.now().timestamp() * 1000)
-trace_id = str(uuid4())
-device_id = str(uuid4())
-
 
 # Initialize with required parameters
 sign_header = BingxSignHeader(
-    timestamp=timestamp,
-    trace_id=trace_id,
-    device_id=device_id,
     request_payload={
         "copyTradeLabelType": "2",
         "apiIdentity": "1347851488071426053",
@@ -71,8 +60,15 @@ sign_header = BingxSignHeader(
 )
 
 # Generate the sign header value
-sign_value = sign_header.generate_sign_header_value()
+sign_value = sign_header.generate_value()
 print(f"Sign Header Value: {sign_value}")
+
+# For request headers make sure to use the same values for timestamp, trace_id and device_id as used in the sign_header.
+# You can do it by accessing them from the sign_header instance.
+print(f"Timestamp: {sign_header.timestamp}")
+print(f"Trace ID: {sign_header.trace_id}")
+print(f"Device ID: {sign_header.device_id}")
+
 ```
 
 ### How do I get request_payload values?
@@ -96,7 +92,7 @@ The `request_payload` comes directly from API requests made by the Bingx web cli
    - Switch to the "Payload" tab to view the request payload. This is the `request_payload` dictionary that you'll use in your code.
 
   ![Developer Tools Example](https://github.com/user-attachments/assets/9bddc5db-d4e8-41e3-ad39-3a9bd7b10925)
-  
+
 7. **Copy and Use:**
    - Copy the values and use them in your Python code to generate the sign header.
 
@@ -117,7 +113,7 @@ The sign header generation logic is located within the JavaScript files loaded b
 
 ![JavaScript Sign Implementation](https://github.com/user-attachments/assets/178245ac-3b2d-45aa-83e1-ad04a714e151)
 
-## Testing 
+## Testing
 
 The project includes comprehensive tests using pytest. The tests ensure that the key functionalities work as expected, including the signing process and payload sorting.
 
