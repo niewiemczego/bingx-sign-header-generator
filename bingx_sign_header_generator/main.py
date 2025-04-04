@@ -5,7 +5,7 @@ from hashlib import sha256
 from typing import Any
 from uuid import uuid4
 
-DEFAULT_APP_VERSION = "4.78.45"
+DEFAULT_APP_VERSION = "4.78.56"
 
 
 @dataclass
@@ -32,7 +32,7 @@ class BingxSignHeader:
         # Sort the request payload by key to ensure consistent order for the sign header generation
         self.request_payload = dict(sorted(self.request_payload.items()))
 
-    def generate_sign_header_value(self) -> str:
+    def generate_value(self) -> str:
         encryption_content = self._generate_encryption_content()
         return self._generate_sign(encryption_content)
 
