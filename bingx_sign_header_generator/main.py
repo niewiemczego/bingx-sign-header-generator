@@ -5,7 +5,7 @@ from hashlib import sha256
 from typing import Any
 from uuid import uuid4
 
-DEFAULT_APP_VERSION = "4.78.56"
+DEFAULT_APP_VERSION = "5.3.17"
 
 
 @dataclass
